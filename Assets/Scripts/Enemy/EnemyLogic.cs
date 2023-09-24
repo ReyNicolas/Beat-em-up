@@ -8,9 +8,13 @@ public class EnemyLogic : MonoBehaviour
     Rigidbody2D rb;
     [Header("Attack info")]
     [SerializeField] int numberOfAttacks;
-    [SerializeField] protected bool isDoingAction;
-    [SerializeField] bool isPlayerClose;
     [SerializeField] AttackLogic attackLogic;
+
+    [Header("State info")]
+    [SerializeField] protected bool isDoingAction;
+    [SerializeField] protected bool canBeCounter;
+    [SerializeField] protected bool isStunned;
+    [SerializeField] bool isPlayerClose;
 
     [Header("Move info")]
     [SerializeField] int minSpeedInt;
@@ -75,6 +79,18 @@ public class EnemyLogic : MonoBehaviour
         isDoingAction = true;
     }
 
+    public virtual bool CanBeCounter()
+    {
+        if (canBeCounter)
+        {
+            isStunned = true;
+            animator.SetBool("Stunned", true);
+            Invoke("SetStunnedFalse", 1);
+            canBeCounter = false;
+            return true;
+        }
+        return false;
+    }
     void Move()
     {
         vMove = playerTransform.position - followTransform.position;
@@ -84,14 +100,25 @@ public class EnemyLogic : MonoBehaviour
         else if (vMove.x < -0.05f) transform.localScale = new Vector3(-1, 1, 1);
     }
 
-    public void EndAction()
+    void EndAction()
     {
-        isDoingAction = false;
+       if(!isStunned)  isDoingAction = false;
+        canBeCounter = false;
+    }
+    void SetCounterFalse()=> 
+        canBeCounter = false;
+    
+    void SetCounterTrue() => 
+        canBeCounter = true;
+
+    void WhenGetHit() => 
+        isDoingAction = true;
+
+    void SetStunnedFalse()
+    {
+        isStunned=false;
+        isDoingAction=false;
+        animator.SetBool("Stunned", false);
     }
 
-    public void WhenGetHit()
-    {
-        isDoingAction = true;
-    }
-    
 }

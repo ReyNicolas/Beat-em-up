@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 6923913592770580893}
   - component: {fileID: 6910911481854456614}
   - component: {fileID: 7365593970012494184}
-  m_Layer: 0
+  - component: {fileID: 4200629414951242855}
+  m_Layer: 8
   m_Name: Attack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,6 +94,21 @@ MonoBehaviour:
   attackID: 0
   enemyTag: Enemy
   attacksDamages: 0c0000000a0000000a000000
+--- !u!114 &4200629414951242855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2786997336634384725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcdca91983aacca4299413bd3e760e7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyTag: Enemy
+  attackID: 1
+  playerController: {fileID: 482582199629600209}
 --- !u!1 &4012041600721647351
 GameObject:
   m_ObjectHideFlags: 0
@@ -289,15 +305,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
+  attackLogic: {fileID: 7365593970012494184}
   moveSpeed: 2
+  vMove: {x: 0, y: 0}
   dashClonePrefab: {fileID: 4012041600721647351, guid: f084418b92b0c1946a7a06541a603cce, type: 3}
-  dashSpeed: 0
-  dashDuration: 0
+  dashSpeed: 10
+  dashDuration: 0.12
+  dashCooldown: 2
+  dashTimer:
+    value: 0
   jumpForce: 0
   isGrounded: 0
   isDoingAction: 0
-  vMove: {x: 0, y: 0}
-  attackLogic: {fileID: 7365593970012494184}
 --- !u!114 &6661023129607388174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -311,7 +330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health:
-    value: 0
+    value: 100
   actualHealth:
     value: 100
   playerData: {fileID: 11400000, guid: 4000f6fd0f9582c44899f3c75be8a920, type: 2}

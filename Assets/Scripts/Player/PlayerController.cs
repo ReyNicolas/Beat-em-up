@@ -12,14 +12,22 @@ public class PlayerController : MonoBehaviour
     [Header("Move info")]
     [SerializeField] float moveSpeed;
     [SerializeField] Vector2 vMove;
+
     [Header("Dash info")]
     [SerializeField] GameObject dashClonePrefab;
     [SerializeField] float dashSpeed;
     [SerializeField] float dashDuration;
     [SerializeField] float dashCooldown;
     public ReactiveProperty<float> dashTimer = new ReactiveProperty<float>();
+
+    [Header("Counter info")]
+    [SerializeField] float counterCooldown;
+    public ReactiveProperty<float> counterTimer = new ReactiveProperty<float>();
+
+
     [Header("Jump info")]
     [SerializeField] float jumpForce;
+
     [Header("State info")]
     [SerializeField] bool isGrounded;
     [SerializeField] bool isDoingAction;
@@ -51,7 +59,13 @@ public class PlayerController : MonoBehaviour
             (update
         .Where(_ => CanAttack())
         .Subscribe(_ => Attack()));
+
+        compositeDisposable.Add
+            (update
+        .Where(_ => CanCounter())
+        .Subscribe(_ => CounterAttack()));
     }
+
 
     private void OnDisable()
     {
@@ -64,6 +78,7 @@ public class PlayerController : MonoBehaviour
         vMove.y = Input.GetAxis("Vertical");
         vMove = Vector2.ClampMagnitude(vMove, 1);
         dashTimer.Value -= Time.deltaTime;
+        counterTimer.Value -= Time.deltaTime;
     }
 
     void Move()
@@ -80,7 +95,7 @@ public class PlayerController : MonoBehaviour
         Flip();
     }
 
-    private void Flip()
+    void Flip()
     {
         if (vMove.x > 0) transform.localScale = new Vector3(1, 1, 1);
         else if (vMove.x < 0) transform.localScale = new Vector3(-1, 1, 1);
@@ -106,6 +121,8 @@ public class PlayerController : MonoBehaviour
         !isDoingAction && Input.GetButtonDown("Fire1");
     bool CanJump() =>
        isGrounded && Input.GetButtonDown("Jump");
+    bool CanCounter() =>
+        !isDoingAction && Input.GetButtonDown("Fire2") && counterTimer.Value <0;
 
     void Attack()
     {
@@ -120,12 +137,24 @@ public class PlayerController : MonoBehaviour
     {
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         anim.SetTrigger("Jump");
-    }     
+    }
 
-    // Called by animation event when attack animation ends
-    public void EndAttack()
-    {
+    void EndAttack() =>
         isDoingAction = false;
+    void CounterAttack()
+    {
+        rb.velocity = Vector2.zero;
+        anim.SetTrigger("CounterAttack");
+        counterTimer.Value = counterCooldown;
+        isDoingAction = true;
+    }
+
+    public void CounterAttackSuccessful(int atacckIndex)
+    {
+        rb.velocity = Vector2.zero;
+        anim.SetTrigger("CounterAttackSuccessful");
+        attackLogic.attackID = atacckIndex;
+        isDoingAction = true;
     }
 }
 

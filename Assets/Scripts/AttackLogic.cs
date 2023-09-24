@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx.Triggers;
 using UniRx;
+using System;
 
 public class AttackLogic : MonoBehaviour
 {
@@ -16,9 +17,9 @@ public class AttackLogic : MonoBehaviour
             .Subscribe(DoDamage);
     }
 
-    private void DoDamage(Collision2D collision) => 
+    void DoDamage(Collision2D collision) => 
         collision.gameObject.GetComponent<IHealth>().LoseHealth(attacksDamages[attackID-1]);
 
-    private bool IsMyEnemyTag(Collision2D collision) => 
+    bool IsMyEnemyTag(Collision2D collision) => 
         collision.gameObject.CompareTag(enemyTag);
 }

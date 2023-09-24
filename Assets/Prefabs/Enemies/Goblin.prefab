@@ -324,6 +324,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numberOfAttacks: 1
   isDoingAction: 0
+  canBeCounter: 0
   isPlayerClose: 0
   attackLogic: {fileID: 7365593970012494184}
   minSpeedInt: 8

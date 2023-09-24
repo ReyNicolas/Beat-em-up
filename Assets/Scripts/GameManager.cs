@@ -55,12 +55,10 @@ public class GameManager : MonoBehaviour
         scenaryData.enemiesInScene.Value += scenaryData.waves[scenaryData.actualWave.Value];
     }
 
-    void UpdateWave()
-    {
+    void UpdateWave() => 
         scenaryData.enemiesInScene.Value--;
-    }
 
-    private void ChangeWave()
+    void ChangeWave()
     {
         if (scenaryData.IsLastWave()) return;
         scenaryData.actualWave.Value++;
