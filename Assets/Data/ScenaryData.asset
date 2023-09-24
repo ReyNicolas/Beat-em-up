@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd3fd8807ddeeeb48a81eb2892d13de9, type: 3}
+  m_Name: ScenaryData
+  m_EditorClassIdentifier: 
+  xHalf: 3
+  yHalf: 3
+  minDistance: 0.5
+  initialHealth: 200
+  enemiesPrefabs:
+  - {fileID: 4012041600721647351, guid: 8605337b4e3377d41a85672ef258318a, type: 3}
+  - {fileID: 948684465562337885, guid: 70880ed8b969afe438666f88417b86f6, type: 3}
+  - {fileID: 5593473007892457652, guid: 58859cf67d00c9741a3463f3c3d8b278, type: 3}
+  minEnemiesInScene: 3
+  waves: 05000000080000000a0000000f000000
+  actualWave:
+    value: 0
+  enemiesInScene:
+    value: 5
