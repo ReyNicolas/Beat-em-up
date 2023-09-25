@@ -1,6 +1,6 @@
-using UnityEngine;
-using UniRx;
 using System.Collections;
+using UniRx;
+using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -42,13 +42,18 @@ public class PlayerController : MonoBehaviour
 
     private void OnEnable()
     {        
-        var update =  Observable.EveryUpdate();
+        SubscribeLogic();
+    }
+
+    public void SubscribeLogic()
+    {
+        var update = Observable.EveryUpdate();
         // update
         compositeDisposable.Add
             (update
-            .Do(_=>GetAxis())
-            .Where(_=>!isDoingAction)
-            .Subscribe(_=>Move()));
+            .Do(_ => GetAxis())
+            .Where(_ => !isDoingAction)
+            .Subscribe(_ => Move()));
 
         compositeDisposable.Add
              (update
@@ -65,7 +70,10 @@ public class PlayerController : MonoBehaviour
         .Where(_ => CanCounter())
         .Subscribe(_ => CounterAttack()));
     }
-
+    public void UnSubscribe()
+    {
+        compositeDisposable.Clear();
+    }
 
     private void OnDisable()
     {

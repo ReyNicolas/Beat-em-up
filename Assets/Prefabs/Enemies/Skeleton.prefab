@@ -81,6 +81,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8672094446185056336, guid: 8605337b4e3377d41a85672ef258318a, type: 3}
+      propertyPath: isStunned
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8672094446185056336, guid: 8605337b4e3377d41a85672ef258318a, type: 3}
       propertyPath: moveSpeed
       value: 0
       objectReference: {fileID: 0}
@@ -91,6 +95,10 @@ PrefabInstance:
     - target: {fileID: 8672094446185056336, guid: 8605337b4e3377d41a85672ef258318a, type: 3}
       propertyPath: minSpeedInt
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8672094446185056336, guid: 8605337b4e3377d41a85672ef258318a, type: 3}
+      propertyPath: stunnedTime
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8672094446185056336, guid: 8605337b4e3377d41a85672ef258318a, type: 3}
       propertyPath: numberOfAttacks

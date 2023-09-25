@@ -314,6 +314,9 @@ MonoBehaviour:
   dashCooldown: 2
   dashTimer:
     value: 0
+  counterCooldown: 5
+  counterTimer:
+    value: 0
   jumpForce: 0
   isGrounded: 0
   isDoingAction: 0

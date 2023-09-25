@@ -323,10 +323,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numberOfAttacks: 1
+  attackLogic: {fileID: 7365593970012494184}
   isDoingAction: 0
   canBeCounter: 0
+  isStunned: 0
+  stunnedTime: 2
   isPlayerClose: 0
-  attackLogic: {fileID: 7365593970012494184}
   minSpeedInt: 8
   maxSpeedInt: 12
   moveSpeed: 1

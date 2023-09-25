@@ -14,6 +14,7 @@ public class EnemyLogic : MonoBehaviour
     [SerializeField] protected bool isDoingAction;
     [SerializeField] protected bool canBeCounter;
     [SerializeField] protected bool isStunned;
+    [SerializeField] float stunnedTime;
     [SerializeField] bool isPlayerClose;
 
     [Header("Move info")]
@@ -85,7 +86,7 @@ public class EnemyLogic : MonoBehaviour
         {
             isStunned = true;
             animator.SetBool("Stunned", true);
-            Invoke("SetStunnedFalse", 1);
+            Invoke("SetStunnedFalse", stunnedTime);
             canBeCounter = false;
             return true;
         }

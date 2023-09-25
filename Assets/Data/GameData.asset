@@ -12,5 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed9640694a5320d4d9f4278371235308, type: 3}
   m_Name: GameData
   m_EditorClassIdentifier: 
+  homeMenuScene: Home
   playerdata: {fileID: 11400000, guid: 4000f6fd0f9582c44899f3c75be8a920, type: 2}
   scenaryData: {fileID: 11400000, guid: 8db2ccd5dce19b54d8522edbbbcf270d, type: 2}
+  mixer: {fileID: 24100000, guid: 65eec38227abf0f4aad2c693513c82eb, type: 2}
+  masterVolume:
+    value: 100
+  musicVolume:
+    value: 100
+  soundEffectsVolume:
+    value: 100
+  interfaceVolume:
+    value: 100
+  volumeMultiplier: 25
+  allMusic:
+  - {fileID: 8300000, guid: 797b9bcd40bc1a24b8fe2f434c405b83, type: 3}
+  - {fileID: 8300000, guid: a24f5fdd3bf43dc4cbff3267ab861a78, type: 3}
+  - {fileID: 8300000, guid: 42c1cd34b06527740a20faab7693712a, type: 3}
+  - {fileID: 8300000, guid: 6410e3b1fd4ca224cb22ffbfc2951060, type: 3}
+  - {fileID: 8300000, guid: 1ec1c37479ae7ac4b912c1fe7f457b0d, type: 3}
+  actualMusicToPLay:
+  - {fileID: 8300000, guid: 797b9bcd40bc1a24b8fe2f434c405b83, type: 3}
+  - {fileID: 8300000, guid: a24f5fdd3bf43dc4cbff3267ab861a78, type: 3}
+  - {fileID: 8300000, guid: 42c1cd34b06527740a20faab7693712a, type: 3}
+  - {fileID: 8300000, guid: 6410e3b1fd4ca224cb22ffbfc2951060, type: 3}
+  - {fileID: 8300000, guid: 1ec1c37479ae7ac4b912c1fe7f457b0d, type: 3}
