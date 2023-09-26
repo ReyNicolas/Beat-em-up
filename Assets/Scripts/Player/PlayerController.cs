@@ -2,7 +2,7 @@ using System.Collections;
 using UniRx;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IEventEntity
 {
     private Rigidbody2D rb;
 
@@ -33,6 +33,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] bool isDoingAction;
 
     CompositeDisposable compositeDisposable = new CompositeDisposable();
+
+    public event System.Action onTakeDamage;
+    public event System.Action onDead;
+    public event System.Action onAttack;
 
     private void Awake()
     {
@@ -134,7 +138,7 @@ public class PlayerController : MonoBehaviour
 
     void Attack()
     {
-        rb.velocity = Vector2.zero;
+        rb.velocity = Vector2.right * transform.localScale.x * 0.5f;
         int attackIndex = Random.Range(1, 4); // Choose a random attack (1, 2, or 3)
         attackLogic.attackID = attackIndex;
         anim.SetTrigger("Attack" + attackIndex);
@@ -149,6 +153,9 @@ public class PlayerController : MonoBehaviour
 
     void EndAttack() =>
         isDoingAction = false;
+
+    void SetDoingActionTrue() =>
+        isDoingAction = true;
     void CounterAttack()
     {
         rb.velocity = Vector2.zero;
@@ -164,6 +171,20 @@ public class PlayerController : MonoBehaviour
         attackLogic.attackID = atacckIndex;
         isDoingAction = true;
     }
+
+    void InvokeOnAttack()
+    {
+        onAttack?.Invoke();
+    }
+    void InvokeOnHit()
+    {
+        onTakeDamage?.Invoke();
+    }
+    void InvokeOnDead()
+    {
+        onDead?.Invoke();
+    }
+
 }
 
 

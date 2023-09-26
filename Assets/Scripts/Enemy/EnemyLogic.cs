@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using UniRx.Triggers;
 using UniRx;
+using System;
 
-public class EnemyLogic : MonoBehaviour
+public class EnemyLogic : MonoBehaviour, IEventEntity
 {
     protected Animator animator;
     Rigidbody2D rb;
@@ -16,6 +17,11 @@ public class EnemyLogic : MonoBehaviour
     [SerializeField] protected bool isStunned;
     [SerializeField] float stunnedTime;
     [SerializeField] bool isPlayerClose;
+
+    public event Action onTakeDamage;
+    public event Action onDead;
+    public event Action onAttack;
+
 
     [Header("Move info")]
     [SerializeField] int minSpeedInt;
@@ -33,7 +39,7 @@ public class EnemyLogic : MonoBehaviour
         animator = GetComponent<Animator>();
         playerTransform = GameObject.FindWithTag("Player").transform;
         rb = GetComponent<Rigidbody2D>();
-        moveSpeed = (float)(Random.Range(minSpeedInt, maxSpeedInt+1))/10;
+        moveSpeed = (float)(UnityEngine.Random.Range(minSpeedInt, maxSpeedInt+1))/10;
         SubscribeLogic();       
     }
 
@@ -73,8 +79,8 @@ public class EnemyLogic : MonoBehaviour
 
     protected virtual void Attack()
     {
-        rb.velocity = Vector2.zero;
-        int attackIndex = Random.Range(1, numberOfAttacks +1 ); // Choose a random attack 
+        rb.velocity = Vector2.right * transform.localScale.x * 0.5f;
+        int attackIndex = UnityEngine.Random.Range(1, numberOfAttacks +1 ); // Choose a random attack 
         attackLogic.attackID = attackIndex;
         animator.SetTrigger("Attack" + attackIndex);
         isDoingAction = true;
@@ -87,6 +93,7 @@ public class EnemyLogic : MonoBehaviour
             isStunned = true;
             animator.SetBool("Stunned", true);
             Invoke("SetStunnedFalse", stunnedTime);
+            rb.velocity = Vector2.zero;
             canBeCounter = false;
             return true;
         }
@@ -122,4 +129,22 @@ public class EnemyLogic : MonoBehaviour
         animator.SetBool("Stunned", false);
     }
 
+    public void SetHit()
+    {
+        rb.velocity = Vector2.right * -transform.localScale.x;
+        animator.SetTrigger("Hit");
+        onTakeDamage?.Invoke();
+    }
+
+    public void SetDead()
+    {
+        rb.velocity = Vector2.zero;
+        animator.SetTrigger("Dead");
+        onDead?.Invoke();
+    }
+
+    void InvokeOnAttack()
+    {
+        onAttack?.Invoke();
+    }
 }

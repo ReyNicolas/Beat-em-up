@@ -3,23 +3,19 @@ using UniRx;
 
 public class EnemyHealthLogic: IHealth
 {
-    [SerializeField] Animator animator;
+    [SerializeField] EnemyLogic enemyLogic;
 
     private void Start()
     {
-        animator = GetComponent<Animator>();
+        enemyLogic = GetComponent<EnemyLogic>();
         actualHealth.Value = health.Value;
     }
 
     public override void LoseHealth(int amount)
     {
         if(actualHealth.Value>0) actualHealth.Value -= amount;
-        if (actualHealth.Value <= 0) SetDead();
-        else animator.SetTrigger("Hit");
+        if (actualHealth.Value <= 0) enemyLogic.SetDead();
+        else enemyLogic.SetHit();
     }
 
-    private void SetDead()
-    {
-        animator.SetTrigger("Dead");
-    }
 }
