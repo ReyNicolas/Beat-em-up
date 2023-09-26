@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     {        
         gameData.SetStartingValues();
         scenaryData = gameData.actualScenaryData;
+        gameData.actualMusicToPlay = scenaryData.musicToPlay;
         playerGO = GameObject.FindWithTag("Player");
         positionAssigner = new PositionAssigner(playerGO.transform,scenaryData.xHalf,scenaryData.yHalf,scenaryData.minDistance);
         StartScenearyWave();

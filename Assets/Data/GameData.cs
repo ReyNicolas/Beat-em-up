@@ -18,8 +18,10 @@ public class GameData : ScriptableObject
     public ReactiveProperty<float> soundEffectsVolume = new ReactiveProperty<float>(1);
     public ReactiveProperty<float> interfaceVolume = new ReactiveProperty<float>(1);
     public float volumeMultiplier;
+    [Header("Music")]
     public List<AudioClip> allMusic;
-    public List<AudioClip> actualMusicToPLay;
+    public List<AudioClip> actualMusicToPlay;
+    CompositeDisposable compositeDisposable;
 
     public void SetStartingValues()
     {
@@ -31,17 +33,17 @@ public class GameData : ScriptableObject
 
     public void DisposeMixer()
     {
-        masterVolume.Dispose();
-        musicVolume.Dispose();
-        soundEffectsVolume.Dispose();
-        interfaceVolume.Dispose();
+        compositeDisposable.Clear();
     }
     public void SetAudioMixer()
     {
-        masterVolume.Subscribe(value => SetAudio("master", value / 100));
-        musicVolume.Subscribe(value => SetAudio("bgm", value / 100));
-        soundEffectsVolume.Subscribe(value => SetAudio("sfx", value / 100));
-        interfaceVolume.Subscribe(value => SetAudio("sui", value / 100));
+        compositeDisposable = new CompositeDisposable
+        {
+            masterVolume.Subscribe(value => SetAudio("master", value / 100)),
+            musicVolume.Subscribe(value => SetAudio("bgm", value / 100)),
+            soundEffectsVolume.Subscribe(value => SetAudio("sfx", value / 100)),
+            interfaceVolume.Subscribe(value => SetAudio("sui", value / 100))
+        };
     }
     void SetAudio(string param, float value)
         => mixer.SetFloat(param, Mathf.Log10(value) * volumeMultiplier);

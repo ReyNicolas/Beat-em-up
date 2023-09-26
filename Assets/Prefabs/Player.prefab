@@ -424,6 +424,7 @@ MonoBehaviour:
   dashSpeed: 10
   dashDuration: 0.12
   dashCooldown: 2
+  dashClones: 3
   dashTimer:
     value: 0
   counterCooldown: 5
@@ -555,7 +556,7 @@ AudioSource:
   m_GameObject: {fileID: 4012041600721647351}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -6176636227001592301, guid: 65eec38227abf0f4aad2c693513c82eb, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1

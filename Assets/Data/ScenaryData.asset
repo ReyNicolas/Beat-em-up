@@ -16,6 +16,12 @@ MonoBehaviour:
   yHalf: 3
   minDistance: 2
   scenaryName: Scenary1
+  musicToPlay:
+  - {fileID: 8300000, guid: 797b9bcd40bc1a24b8fe2f434c405b83, type: 3}
+  - {fileID: 8300000, guid: a24f5fdd3bf43dc4cbff3267ab861a78, type: 3}
+  - {fileID: 8300000, guid: 42c1cd34b06527740a20faab7693712a, type: 3}
+  - {fileID: 8300000, guid: 6410e3b1fd4ca224cb22ffbfc2951060, type: 3}
+  - {fileID: 8300000, guid: 1ec1c37479ae7ac4b912c1fe7f457b0d, type: 3}
   initialHealth: 200
   enemiesPrefabs:
   - {fileID: 4012041600721647351, guid: 8605337b4e3377d41a85672ef258318a, type: 3}

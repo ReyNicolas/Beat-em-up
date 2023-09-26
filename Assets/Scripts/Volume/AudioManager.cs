@@ -28,16 +28,19 @@ public class AudioManager : MonoBehaviour
     private void OnDisable()
     {
         compositeDisposable.Dispose();
+        gameData.DisposeMixer();
     }
 
-    void PlayNewTrack() =>
-        musicSource.PlayOneShot(GetRandomMusic());
-
+    void PlayNewTrack()
+    {
+        musicSource.clip = GetRandomMusic();
+        musicSource.Play();
+    }
     bool MusicEnd() => 
         !musicSource.isPlaying;
 
     AudioClip GetRandomMusic() =>
-        gameData.actualMusicToPLay[Random.Range(0, gameData.actualMusicToPLay.Count)];
+        gameData.actualMusicToPlay[Random.Range(0, gameData.actualMusicToPlay.Count)];
 
 
 }

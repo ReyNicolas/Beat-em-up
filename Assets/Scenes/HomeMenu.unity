@@ -748,6 +748,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameData: {fileID: 11400000, guid: e28f2d1466ba57b4fadb2a70cb5358f0, type: 2}
+  musicToPlay:
+  - {fileID: 8300000, guid: c1c7e3fb1f32b4a47ab4338b4a0cebb5, type: 3}
+  - {fileID: 8300000, guid: 750fa9f5f6238d04aad3ca56b2838744, type: 3}
+  - {fileID: 8300000, guid: a3d1d69ebf651ec49a0aa825782812b1, type: 3}
+  - {fileID: 8300000, guid: c67b3b43a1d57aa4f9f878bfa15aa65c, type: 3}
+  - {fileID: 8300000, guid: 0776112884ccdcf4a8610341299a4d2d, type: 3}
 --- !u!4 &668856237
 Transform:
   m_ObjectHideFlags: 0

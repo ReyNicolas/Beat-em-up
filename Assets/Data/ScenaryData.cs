@@ -10,6 +10,7 @@ public class ScenaryData : ScriptableObject
     public float yHalf;
     public float minDistance;
     public string scenaryName;
+    public List<AudioClip> musicToPlay;
 
     [Header("Player info")]
     public int initialHealth;
@@ -20,6 +21,8 @@ public class ScenaryData : ScriptableObject
     public List<int> waves = new List<int>();
     public ReactiveProperty<int> actualWave = new ReactiveProperty<int>();
     public ReactiveProperty<int> enemiesInScene = new ReactiveProperty<int>();
+
+
 
 
     public bool IsLastWave()
