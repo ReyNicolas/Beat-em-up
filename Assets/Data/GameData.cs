@@ -6,9 +6,11 @@ using UnityEngine.Audio;
 [CreateAssetMenu(fileName = "GameData", menuName = "Scriptables/Game Data", order = 2)]
 public class GameData : ScriptableObject
 {
+    [Header("Game info")]
     public string homeMenuScene;
     public PlayerData playerdata;
-    public ScenaryData scenaryData;
+    public ScenaryData actualScenaryData;
+    public List<ScenaryData> allScenariesDatas;
     [Header("Sound Settings")]
     public AudioMixer mixer;
     public ReactiveProperty<float> masterVolume = new ReactiveProperty<float>(1);
@@ -21,9 +23,9 @@ public class GameData : ScriptableObject
 
     public void SetStartingValues()
     {
-        playerdata.playerHealth.Value = scenaryData.initialHealth;
-        scenaryData.actualWave.Value = 0;
-        scenaryData.enemiesInScene.Value = 0;
+        playerdata.playerHealth.Value = actualScenaryData.initialHealth;
+        actualScenaryData.actualWave.Value = 0;
+        actualScenaryData.enemiesInScene.Value = 0;
     }
 
 

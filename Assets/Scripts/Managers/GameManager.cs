@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {        
         gameData.SetStartingValues();
-        scenaryData = gameData.scenaryData;
+        scenaryData = gameData.actualScenaryData;
         playerGO = GameObject.FindWithTag("Player");
         positionAssigner = new PositionAssigner(playerGO.transform,scenaryData.xHalf,scenaryData.yHalf,scenaryData.minDistance);
         StartScenearyWave();

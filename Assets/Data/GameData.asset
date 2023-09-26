@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed9640694a5320d4d9f4278371235308, type: 3}
   m_Name: GameData
   m_EditorClassIdentifier: 
-  homeMenuScene: Home
+  homeMenuScene: HomeMenu
   playerdata: {fileID: 11400000, guid: 4000f6fd0f9582c44899f3c75be8a920, type: 2}
-  scenaryData: {fileID: 11400000, guid: 8db2ccd5dce19b54d8522edbbbcf270d, type: 2}
+  actualScenaryData: {fileID: 11400000, guid: 8db2ccd5dce19b54d8522edbbbcf270d, type: 2}
+  allScenariesDatas:
+  - {fileID: 11400000, guid: 8db2ccd5dce19b54d8522edbbbcf270d, type: 2}
   mixer: {fileID: 24100000, guid: 65eec38227abf0f4aad2c693513c82eb, type: 2}
   masterVolume:
     value: 100
