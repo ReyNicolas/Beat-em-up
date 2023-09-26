@@ -108,6 +108,12 @@ public class GameManager : MonoBehaviour
     public void ReturnHomeMenu()
     {
         SceneManager.LoadScene(gameData.homeMenuScene);
+        Time.timeScale = 1;
+    }
+    public void Restart()
+    {
+        SceneManager.LoadScene(scenaryData.scenaryName);
+        Time.timeScale = 1;
     }
 
 }

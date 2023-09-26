@@ -4,6 +4,7 @@ public class PositionAssigner
 {
     Transform playerTransform;
     float xHalf, yHalf, minDistance;
+    Vector3 newPosition;
 
     public PositionAssigner(Transform playerTransform, float xHalf, float yHalf, float minDistance)
     {
@@ -14,8 +15,7 @@ public class PositionAssigner
     }
 
     public Vector3 GetPosition()
-    {
-        Vector3 newPosition;
+    {        
         while (true)
         {
             newPosition = new Vector3(Random.Range(-xHalf, xHalf), Random.Range(-yHalf, yHalf));

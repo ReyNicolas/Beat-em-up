@@ -271,6 +271,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6509001143050186018, guid: 203e9c78f614f084b9864957d9e94eed, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 344247775}
+    - target: {fileID: 6509001143050186018, guid: 203e9c78f614f084b9864957d9e94eed, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Restart
+      objectReference: {fileID: 0}
     - target: {fileID: 6703388950641436171, guid: 203e9c78f614f084b9864957d9e94eed, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0.0050650653
@@ -1214,6 +1222,10 @@ PrefabInstance:
     - target: {fileID: 4012041600721647351, guid: 58ad132382419f34589c416bd3b8f7ab, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4012041600721647351, guid: 58ad132382419f34589c416bd3b8f7ab, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8552085045809022533, guid: 58ad132382419f34589c416bd3b8f7ab, type: 3}
       propertyPath: m_LocalPosition.x

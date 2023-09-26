@@ -9,6 +9,7 @@ public class ScenaryData : ScriptableObject
     public float xHalf;
     public float yHalf;
     public float minDistance;
+    public string scenaryName;
 
     [Header("Player info")]
     public int initialHealth;

@@ -8,17 +8,21 @@ public class PlayerController : MonoBehaviour, IEventEntity
 
     public Animator anim;
     [SerializeField] AttackLogic attackLogic;
+    int attackIndex;
 
     [Header("Move info")]
     [SerializeField] float moveSpeed;
     [SerializeField] Vector2 vMove;
+    Vector3 vFlip = new Vector3(-1, 1, 1);
 
     [Header("Dash info")]
     [SerializeField] GameObject dashClonePrefab;
     [SerializeField] float dashSpeed;
     [SerializeField] float dashDuration;
     [SerializeField] float dashCooldown;
+    [SerializeField] int dashClones = 3;
     public ReactiveProperty<float> dashTimer = new ReactiveProperty<float>();
+    WaitForSeconds dashCorrutineWait;
 
     [Header("Counter info")]
     [SerializeField] float counterCooldown;
@@ -41,7 +45,8 @@ public class PlayerController : MonoBehaviour, IEventEntity
     private void Awake()
     {
         anim = GetComponent<Animator>();
-        rb = GetComponent<Rigidbody2D>();       
+        rb = GetComponent<Rigidbody2D>();
+        dashCorrutineWait = new WaitForSeconds(dashDuration / (dashClones * 2));
     }
 
     private void OnEnable()
@@ -109,8 +114,8 @@ public class PlayerController : MonoBehaviour, IEventEntity
 
     void Flip()
     {
-        if (vMove.x > 0) transform.localScale = new Vector3(1, 1, 1);
-        else if (vMove.x < 0) transform.localScale = new Vector3(-1, 1, 1);
+        if (vMove.x > 0) transform.localScale = Vector3.one;
+        else if (vMove.x < 0) transform.localScale = vFlip;
     }
 
     IEnumerator Dash()
@@ -120,9 +125,9 @@ public class PlayerController : MonoBehaviour, IEventEntity
         anim.SetBool("Dash", true);
         for(int i = 1; i <=3; i++)
         {
-            yield return new WaitForSeconds(dashDuration/6);
+            yield return dashCorrutineWait;
             Instantiate(dashClonePrefab,transform.position,Quaternion.identity).transform.localScale = transform.localScale;
-            yield return new WaitForSeconds(dashDuration / 6);
+            yield return dashCorrutineWait;
         }
         anim.SetBool("Dash", false);
         isDoingAction=false;
@@ -138,8 +143,8 @@ public class PlayerController : MonoBehaviour, IEventEntity
 
     void Attack()
     {
-        rb.velocity = Vector2.right * transform.localScale.x * 0.5f;
-        int attackIndex = Random.Range(1, 4); // Choose a random attack (1, 2, or 3)
+        rb.velocity = Vector2.right * transform.localScale.x * moveSpeed * 0.1f;
+        attackIndex = Random.Range(1, 4); // Choose a random attack (1, 2, or 3)
         attackLogic.attackID = attackIndex;
         anim.SetTrigger("Attack" + attackIndex);
         isDoingAction = true;

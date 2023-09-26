@@ -2,6 +2,7 @@
 using UniRx.Triggers;
 using UniRx;
 using System;
+using System.Linq;
 
 public class EnemyLogic : MonoBehaviour, IEventEntity
 {
@@ -10,6 +11,7 @@ public class EnemyLogic : MonoBehaviour, IEventEntity
     [Header("Attack info")]
     [SerializeField] int numberOfAttacks;
     [SerializeField] AttackLogic attackLogic;
+    int attackIndex;
 
     [Header("State info")]
     [SerializeField] protected bool isDoingAction;
@@ -17,6 +19,7 @@ public class EnemyLogic : MonoBehaviour, IEventEntity
     [SerializeField] protected bool isStunned;
     [SerializeField] float stunnedTime;
     [SerializeField] bool isPlayerClose;
+    [SerializeField] LayerMask enemiesMask;
 
     public event Action onTakeDamage;
     public event Action onDead;
@@ -30,6 +33,7 @@ public class EnemyLogic : MonoBehaviour, IEventEntity
     [SerializeField] Vector3 vMove;
     [SerializeField] protected Transform followTransform;
     [SerializeField] protected Transform playerTransform;
+    Vector3 vFlip = new Vector3(-1, 1, 1);
 
     protected CompositeDisposable compositeDisposable = new CompositeDisposable();
 
@@ -41,6 +45,10 @@ public class EnemyLogic : MonoBehaviour, IEventEntity
         rb = GetComponent<Rigidbody2D>();
         moveSpeed = (float)(UnityEngine.Random.Range(minSpeedInt, maxSpeedInt+1))/10;
         SubscribeLogic();       
+    }
+    private void OnDisable()
+    {
+        DisposeLogic();
     }
 
     protected virtual void SubscribeLogic()
@@ -80,7 +88,7 @@ public class EnemyLogic : MonoBehaviour, IEventEntity
     protected virtual void Attack()
     {
         rb.velocity = Vector2.right * transform.localScale.x * 0.5f;
-        int attackIndex = UnityEngine.Random.Range(1, numberOfAttacks +1 ); // Choose a random attack 
+        attackIndex = UnityEngine.Random.Range(1, numberOfAttacks +1 ); // Choose a random attack 
         attackLogic.attackID = attackIndex;
         animator.SetTrigger("Attack" + attackIndex);
         isDoingAction = true;
@@ -102,10 +110,29 @@ public class EnemyLogic : MonoBehaviour, IEventEntity
     void Move()
     {
         vMove = playerTransform.position - followTransform.position;
+        NeighborsMoveModify();
+
         transform.position = Vector2.MoveTowards(transform.position, transform.position + vMove, moveSpeed * Time.deltaTime);
         animator.SetFloat("Speed", vMove.sqrMagnitude);
-        if (vMove.x > 0.05f) transform.localScale = new Vector3(1, 1, 1);
-        else if (vMove.x < -0.05f) transform.localScale = new Vector3(-1, 1, 1);
+        if (vMove.x > 0.05f) transform.localScale = Vector3.one;
+        else if (vMove.x < -0.05f) transform.localScale = vFlip;
+    }
+
+    private void NeighborsMoveModify()
+    {
+        Collider2D[] nearbyEnemies = Physics2D.OverlapCircleAll(transform.position, 0.2f, enemiesMask);
+        Vector3 separationVector = Vector3.zero;
+
+        if (nearbyEnemies.Any(c2D => c2D.CompareTag("Player"))) return;
+        foreach (var enemy in nearbyEnemies)
+        {
+            if (enemy.gameObject != gameObject)
+            {
+                Vector3 directionToNeighbor = transform.position - enemy.transform.position;
+                separationVector += directionToNeighbor;
+            }
+        }
+        vMove += separationVector;
     }
 
     void EndAction()

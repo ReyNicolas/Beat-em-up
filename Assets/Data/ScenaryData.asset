@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xHalf: 3
   yHalf: 3
-  minDistance: 0.5
+  minDistance: 2
+  scenaryName: Scenary1
   initialHealth: 200
   enemiesPrefabs:
   - {fileID: 4012041600721647351, guid: 8605337b4e3377d41a85672ef258318a, type: 3}
@@ -23,6 +24,6 @@ MonoBehaviour:
   minEnemiesInScene: 3
   waves: 05000000080000000a0000000f000000
   actualWave:
-    value: 0
+    value: 3
   enemiesInScene:
-    value: 5
+    value: 8

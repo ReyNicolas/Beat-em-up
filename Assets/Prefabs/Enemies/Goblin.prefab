@@ -472,6 +472,9 @@ MonoBehaviour:
   isStunned: 0
   stunnedTime: 2
   isPlayerClose: 0
+  enemiesMask:
+    serializedVersion: 2
+    m_Bits: 72
   minSpeedInt: 8
   maxSpeedInt: 12
   moveSpeed: 1
