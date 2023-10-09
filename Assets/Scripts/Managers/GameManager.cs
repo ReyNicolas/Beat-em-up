@@ -2,7 +2,6 @@ using UnityEngine;
 using UniRx;
 using System;
 using UnityEngine.SceneManagement;
-using static UnityEditor.Progress;
 
 public class GameManager : MonoBehaviour
 {
