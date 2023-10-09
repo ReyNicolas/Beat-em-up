@@ -168,6 +168,7 @@ public class EnemyLogic : MonoBehaviour, IEventEntity
         rb.velocity = Vector2.zero;
         animator.SetTrigger("Dead");
         onDead?.Invoke();
+        Destroy(gameObject, 10f);
     }
 
     void InvokeOnAttack()
