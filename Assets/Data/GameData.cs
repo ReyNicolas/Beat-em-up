@@ -11,6 +11,7 @@ public class GameData : ScriptableObject
     public PlayerData playerdata;
     public ScenaryData actualScenaryData;
     public List<ScenaryData> allScenariesDatas;
+    public bool infinite;
     [Header("Sound Settings")]
     public AudioMixer mixer;
     public ReactiveProperty<float> masterVolume = new ReactiveProperty<float>(1);

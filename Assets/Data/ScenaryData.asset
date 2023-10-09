@@ -32,4 +32,4 @@ MonoBehaviour:
   actualWave:
     value: 3
   enemiesInScene:
-    value: 8
+    value: 4

@@ -17,6 +17,7 @@ MonoBehaviour:
   actualScenaryData: {fileID: 11400000, guid: 8db2ccd5dce19b54d8522edbbbcf270d, type: 2}
   allScenariesDatas:
   - {fileID: 11400000, guid: 8db2ccd5dce19b54d8522edbbbcf270d, type: 2}
+  infinite: 1
   mixer: {fileID: 24100000, guid: 65eec38227abf0f4aad2c693513c82eb, type: 2}
   masterVolume:
     value: 100
@@ -33,7 +34,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 42c1cd34b06527740a20faab7693712a, type: 3}
   - {fileID: 8300000, guid: 6410e3b1fd4ca224cb22ffbfc2951060, type: 3}
   - {fileID: 8300000, guid: 1ec1c37479ae7ac4b912c1fe7f457b0d, type: 3}
-  actualMusicToPLay:
+  actualMusicToPlay:
   - {fileID: 8300000, guid: 797b9bcd40bc1a24b8fe2f434c405b83, type: 3}
   - {fileID: 8300000, guid: a24f5fdd3bf43dc4cbff3267ab861a78, type: 3}
   - {fileID: 8300000, guid: 42c1cd34b06527740a20faab7693712a, type: 3}

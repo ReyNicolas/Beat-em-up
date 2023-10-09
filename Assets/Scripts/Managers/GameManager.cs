@@ -40,6 +40,14 @@ public class GameManager : MonoBehaviour
              .Where(_ => scenaryData.AreLessThanMinEnemiesInScene())
              .Subscribe(_ => ChangeWave()));
 
+        if (gameData.infinite)
+        {
+            compositeDisposable.Add(
+            scenaryData.enemiesInScene
+             .Where(_ => scenaryData.AreLessThanMinEnemiesInScene())
+             .Subscribe(_ => StartScenearyWave()));
+        }
+
         compositeDisposable.Add(
             scenaryData.enemiesInScene
               .Where(_ => scenaryData.IsLastWave() && scenaryData.enemiesInScene.Value == 0)
