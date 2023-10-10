@@ -11,6 +11,7 @@ public class GameData : ScriptableObject
     public PlayerData playerdata;
     public ScenaryData actualScenaryData;
     public List<ScenaryData> allScenariesDatas;
+    public ReactiveProperty<int> enemiesKilled = new ReactiveProperty<int>(0);
     public bool infinite;
     [Header("Sound Settings")]
     public AudioMixer mixer;
@@ -27,6 +28,7 @@ public class GameData : ScriptableObject
     public void SetStartingValues()
     {
         playerdata.playerHealth.Value = actualScenaryData.initialHealth;
+        enemiesKilled.Value = 0;
         actualScenaryData.actualWave.Value = 0;
         actualScenaryData.enemiesInScene.Value = 0;
     }

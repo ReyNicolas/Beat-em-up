@@ -51,13 +51,13 @@ public class GameManager : MonoBehaviour
         compositeDisposable.Add(
             scenaryData.enemiesInScene
               .Where(_ => scenaryData.IsLastWave() && scenaryData.enemiesInScene.Value == 0)
-              .Subscribe(_ => Invoke("StopGame",1)));
+              .Subscribe(_ => Invoke("OnGameEnd", 1)));
 
         // when player die
         compositeDisposable.Add(
             playerGO.GetComponent<PlayerHealthLogic>().actualHealth
             .Where(IsDead)
-            .Subscribe(_ => Invoke("StopGame", 1))
+            .Subscribe(_ => Invoke("OnGameEnd", 1))
             );
     }
 
@@ -89,14 +89,17 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < scenaryData.waves[scenaryData.actualWave.Value]; i++)
         {
             GameObject newEnemy = Instantiate(scenaryData.GetRandomEnemyPrefab(), positionAssigner.GetPosition(), Quaternion.identity);
-            newEnemy.GetComponent<EnemyHealthLogic>().actualHealth.Where(IsDead).Subscribe(_ => UpdateWave());
+            newEnemy.GetComponent<EnemyHealthLogic>().actualHealth.Where(IsDead).Subscribe(_ => UpdateEnemiesWave());
             OnEnemyCreated?.Invoke(newEnemy);
         }
         scenaryData.enemiesInScene.Value += scenaryData.waves[scenaryData.actualWave.Value];
     }
 
-    void UpdateWave() => 
+    void UpdateEnemiesWave()
+    {
         scenaryData.enemiesInScene.Value--;
+        gameData.enemiesKilled.Value++;
+    }
 
     void ChangeWave()
     {
@@ -107,6 +110,12 @@ public class GameManager : MonoBehaviour
 
     bool IsDead(int actualHealth)
         => actualHealth <= 0;
+
+    void OnGameEnd()
+    {
+        StopGame();
+        optionsGO.SetActive(true); 
+    }
 
     void StopGame()
     {
