@@ -1,5 +1,4 @@
 # Beat-em-up Prototype (Unity)
-# PearlsPirates (Unity)
 
 ## Description
 Beat-em-up prototype, deafeat waves of enemies
